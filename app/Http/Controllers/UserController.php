@@ -31,10 +31,22 @@ class UserController extends Controller
     public function store(Request $request)
     {
 
-        $user = new User;
+        $data = $request->all();
+        $data['password'] = bcrypt($request->password);
 
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->password = $request->password;
+        User::create($data);
+
+        // retorno fazendo redirect para detalhes e passo id
+        // return redirect()->route('users.show', $user->id);
+
+        // retorno fazendo redirect para listagem
+        return redirect()->route('users.index');
+    }
+
+    public function destroy($id)
+    {
+        User::destroy($id);
+
+        return redirect()->route('users.index');
     }
 }
