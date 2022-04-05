@@ -42,7 +42,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    public function getAllUsers(string $search = null)
+    public function getAllUsers(string|null $search = null)
     {
         $users = User::where(function ($query) use ($search) {
             if ($search) {
