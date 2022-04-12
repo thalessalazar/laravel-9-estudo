@@ -1,13 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Cadastro de Usuários')
+@section('title', 'Novo Usuário')
 
 @section('content')
-    <h1>Novo Usuário</h1>
+    <h1 class="text-2xl font-semibold leading-tigh py-2">Novo Usuário</h1>
 
-    @include('include.validation-form')
+    @include('includes.validation-form')
 
-    <form action="{{ route('users.store') }}" method="POST">
+    <form action="{{ route('users.store') }}" method="post" enctype="multipart/form-data">
         @include('users.partials.form')
     </form>
+
 @endsection
