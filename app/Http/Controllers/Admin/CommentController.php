@@ -58,4 +58,67 @@ class CommentController extends Controller
 
         return redirect()->route('comments.index', $user->id);
     }
+
+    public function destroy($idUser, $idComment)
+    {
+        $user = $this->user->find($idUser);
+
+        if (!$user) {
+            return redirect()->back();
+        }
+
+        $this->comment->destroy($idComment);
+
+        return redirect()->route('comments.index', $user->id);
+    }
+
+    public function show($idUser, $idComment)
+    {
+        $user = $this->user->find($idUser);
+
+        if (!$user) {
+            return redirect()->back();
+        }
+
+        $comment = $this->comment->find($idComment);
+
+        return view('users.comments.show', compact('user', 'comment'));
+    }
+
+    public function edit($idUser, $idComment)
+    {
+        $user = $this->user->find($idUser);
+
+        if (!$user) {
+            return redirect()->back();
+        }
+
+        $comment = $this->comment->find($idComment);
+
+        return view('users.comments.edit', compact('user', 'comment'));
+    }
+
+    public function update(Request $request, $idUser, $idComment)
+    {
+        $user = $this->user->find($idUser);
+
+        if (!$user) {
+            return redirect()->back();
+        }
+
+        $comment = $this->comment->find($idComment);
+
+        if (!$comment) {
+            return redirect()->back();
+        }
+
+        // dd($data);
+
+        $comment->update([
+            "body" => $request->body,
+            "visible" => isset($request->visible)
+        ]);
+
+        return redirect()->route('comments.index', $user->id);
+    }
 }

@@ -17,13 +17,17 @@ use App\Http\Controllers\Admin\CommentController;
 |
 */
 
+Route::delete('/users/{idUser}/comments/{idComment}', [CommentController::class, 'destroy'])->name('comments.destroy');
 Route::post('/users/{id}/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::get('/users/{id}/comments/create', [CommentController::class, 'create'])->name('comments.create');
 Route::get('/users/{id}/comments', [CommentController::class, 'index'])->name('comments.index');
+Route::get('/users/{idUser}/comments/{idComment}', [CommentController::class, 'show'])->name('comments.show');
+Route::get('/users/{idUser}/comments/{idComment}/edit', [CommentController::class, 'edit'])->name('comments.edit');
+Route::put('/users/{idUser}/comments/{idComment}', [CommentController::class, 'update'])->name('comments.update');
 
+Route::delete('/users/destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::put('/users/{id}', [UserController::class, 'update'])->name('users.update');
 Route::get('/users/{id}/edit', [UserController::class, 'edit'])->name('users.edit');
-Route::get('/users/destroy/{id}', [UserController::class, 'destroy'])->name('users.destroy');
 Route::get('/users/create', [UserController::class, 'create'])->name('users.create');
 Route::get('/users', [UserController::class, 'index'])->name('users.index');
 Route::post('/users', [UserController::class, 'store'])->name('users.store');

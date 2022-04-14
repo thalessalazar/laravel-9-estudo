@@ -17,10 +17,13 @@
     ease-in-out
     m-0
     focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none
-    "></textarea>
+    "
+        required>
+    {{ $comment->body ?? old('body') }}
+</textarea>
 
     <label for="visible">
-        <input type="checkbox" name="visible">
+        <input type="checkbox" name="visible" {{ $comment->visible ?? old('body') ? 'checked' : '' }}>
         Visível?
     </label>
 
