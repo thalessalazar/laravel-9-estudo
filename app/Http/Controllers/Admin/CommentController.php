@@ -18,7 +18,7 @@ class CommentController extends Controller
         $this->user = $user;
     }
 
-    public function index($idUser)
+    public function index(Request $request, $idUser)
     {
         $user = $this->user->find($idUser);
 
@@ -27,7 +27,7 @@ class CommentController extends Controller
         }
 
         // busco todos os comentários
-        $comments = $user->comments()->get();
+        $comments = $user->comments()->where('body', 'LIKE', "%$request->search%")->get();
 
         return view('users.comments.index', compact('user', 'comments'));
     }
