@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\StoreUpdateCommentRequest;
 use App\Http\Requests\StoreUpdateCommentsFormRequest;
 use App\Models\{Comment, User};
 use Illuminate\Http\Request;
@@ -43,7 +44,7 @@ class CommentController extends Controller
         return view('users.comments.create', compact('user'));
     }
 
-    public function store(Request $request, $idUser)
+    public function store(StoreUpdateCommentRequest $request, $idUser)
     {
         $user = $this->user->find($idUser);
 
